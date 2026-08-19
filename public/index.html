@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Store Admin Panel</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        sidebar: '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .toast-enter { animation: toastIn 0.3s ease forwards; }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- ===== ANTI-DEBUGGING PROTECTION ===== -->
+    <script>
+        // Disable right-click context menu (Inspect)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Block keyboard shortcuts for DevTools & view-source
+        document.addEventListener('keydown', function(e) {
+            var key = e.key ? e.key.toUpperCase() : '';
+            var blockedKeys = [
+                'F12',
+                (e.ctrlKey && e.shiftKey && (key === 'I' || key === 'J' || key === 'C')),
+                (e.ctrlKey && e.shiftKey && key === 'K'),
+                (e.ctrlKey && key === 'U'),
+                (e.ctrlKey && e.shiftKey && key === 'S'),
+                (e.metaKey && (key === 'I' || key === 'J' || key === 'U'))
+            ];
+            if (blockedKeys.includes(true) || key === 'F12') {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        });
+
+        // Prevent text selection (copy protection)
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Clear console periodically to hide network/dev logs
+        setInterval(function() {
+            console.clear();
+        }, 500);
+
+        // Override console methods to hide output
+        (function() {
+            var noop = function() {};
+            console.log = noop;
+            console.info = noop;
+            console.warn = noop;
+            console.debug = noop;
+            console.trace = noop;
+            console.error = function(msg) { /* suppress errors in console */ };
+        })();
+
+        // Detect DevTools open by window size and clear content
+        (function() {
+            var threshold = 160;
+            function detectDevTools() {
+                var widthDiff = window.outerWidth - window.innerWidth;
+                var heightDiff = window.outerHeight - window.innerHeight;
+                if (widthDiff > threshold || heightDiff > threshold) {
+                    // Hide the app content
+                    document.body.innerHTML = '<div style="display:none"></div>';
+                    document.body.style.background = '#000';
+                }
+            }
+            setInterval(detectDevTools, 800);
+
+            // Detect DevTools using debugger timing trick
+            var lastRun = 0;
+            function debuggerDetect() {
+                var start = performance.now();
+                (function() {})(); // avoid actual debugger pause to not freeze legit use
+                var end = performance.now();
+                lastRun = end;
+            }
+            setInterval(debuggerDetect, 800);
+        })();
+    </script>
+</head>
+<body class="bg-gray-100">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+</body>
+</html>
