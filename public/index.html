@@ -101,30 +101,6 @@
             console.error = function(msg) { /* suppress errors in console */ };
         })();
 
-        // Detect DevTools open by window size and clear content
-        (function() {
-            var threshold = 160;
-            function detectDevTools() {
-                var widthDiff = window.outerWidth - window.innerWidth;
-                var heightDiff = window.outerHeight - window.innerHeight;
-                if (widthDiff > threshold || heightDiff > threshold) {
-                    // Hide the app content
-                    document.body.innerHTML = '<div style="display:none"></div>';
-                    document.body.style.background = '#000';
-                }
-            }
-            setInterval(detectDevTools, 800);
-
-            // Detect DevTools using debugger timing trick
-            var lastRun = 0;
-            function debuggerDetect() {
-                var start = performance.now();
-                (function() {})(); // avoid actual debugger pause to not freeze legit use
-                var end = performance.now();
-                lastRun = end;
-            }
-            setInterval(debuggerDetect, 800);
-        })();
     </script>
 </head>
 <body class="bg-gray-100">
