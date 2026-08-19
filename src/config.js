@@ -1,5 +1,6 @@
 // ========== ADMIN API CONFIGURATION ==========
-export const API_URL = "http://localhost:8000";
+// Production (Vercel) backend URL
+export const API_URL = "https://backend-bookstore-zzqd.onrender.com";
 
 // Admin local storage keys
 export const ADMIN_TOKEN_KEY = "bookstore_admin_token";
